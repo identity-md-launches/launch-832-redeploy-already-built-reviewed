@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101712">
+  <meta name="description" content="KING: the onchain throne game on Robinhood Chain. Buy the crown, hold your KING, and claim your reign's income.">
+  <title>KING · The throne is never yours forever.</title>
+  <link rel="icon" href="./crown.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <a class="brand" href="#throne" aria-label="KING home"><img src="./crown.svg" alt="" width="36" height="36"> KING<span>$KING</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#throne">Throne</a><a href="#trade">Trade</a><a href="#claim">Claim &amp; dethrone</a><a href="#about">How it works</a>
+    </nav>
+    <button id="connect" class="outline">Connect wallet</button>
+  </header>
+  <main id="main">
+    <div class="network-line"><span><i></i> ROBINHOOD CHAIN</span><span id="read-status" role="status">Connecting to the throne…</span><button id="refresh" class="text-button">Refresh</button></div>
+    <div id="deployment-notice" class="notice" hidden>The launch is awaiting deployment. Live balances and trading will become available after the contracts are deployed and verified.</div>
+    <div id="message" class="notice" role="status" aria-live="polite" hidden></div>
+    <section id="throne" class="page">
+      <div class="hero"><div><p class="eyebrow">ONE THRONE. EVERYONE'S GAME.</p><h1>The throne is never<br><em>yours forever.</em></h1><p class="lede">Make your move. Hold your KING.<br>Earn a share of the throne pool while you reign.</p><a class="button" href="#trade">Challenge the king <span aria-hidden="true">↗</span></a></div><div class="crown-art" aria-hidden="true"><div class="orbit"></div><img src="./crown.svg" alt=""><span>LONG LIVE THE NEXT KING</span></div></div>
+      <div class="throne-grid">
+        <article class="panel ruler"><p class="eyebrow">THE REIGNING KING</p><h2 id="king">Awaiting deployment</h2><p id="reign-time">No live reign data</p><div class="ruler-stats"><div><span>Income this reign</span><strong id="king-earned">—</strong></div><div><span>Claimable now</span><strong id="king-claimable">—</strong></div></div><p id="vesting" class="muted">Income vests after five minutes of holding the throne.</p></article>
+        <article class="panel price"><p class="eyebrow">THE NEXT MOVE</p><span>Throne price</span><h2 id="throne-price">— <small>ETH</small></h2><p id="halving">Halving countdown appears when the game is live.</p><p class="muted">A single buy at or above this price can take the throne.</p></article>
+      </div>
+      <div class="metrics"><article><span>Throne pool</span><strong id="pool-size">—</strong><small>Funded by trading fees</small></article><article><span>King income / hour</span><strong id="income-hour">—</strong><small>2% of the current throne pool</small></article><article><span>Current hook fee</span><strong id="hook-fee">—</strong><small>Plus the separate 1.25% pool fee</small></article></div>
+      <div class="section-title"><div><p class="eyebrow">WRITTEN ONCHAIN</p><h2>The line of succession</h2></div><div class="pagination"><button id="newer" class="outline" disabled>Newer</button><button id="older" class="outline" disabled>Older</button></div></div>
+      <div class="table-wrap"><table><caption class="sr-only">Reign history, newest first</caption><thead><tr><th>King</th><th>Reign began</th><th>Time on throne</th><th>Income earned</th><th>How it ended</th></tr></thead><tbody id="history"><tr><td colspan="5">History will appear after deployment.</td></tr></tbody></table></div>
+    </section>
+    <section id="trade" class="page" hidden>
+      <p class="eyebrow">YOUR MOVE</p><h1>Trade for the crown.</h1><p class="lede">Every trade funds the throne. Every qualifying buy is a challenge.</p>
+      <div class="action-grid"><form id="trade-form" class="panel"><div class="tabs" role="group" aria-label="Trade direction"><button type="button" id="buy-tab" aria-pressed="true">Buy KING</button><button type="button" id="sell-tab" aria-pressed="false">Sell KING</button></div>
+        <label for="trade-amount" id="amount-label">You pay · ETH</label><input id="trade-amount" type="text" inputmode="decimal" placeholder="0.01" autocomplete="off" required><p id="wallet-balance" class="muted">Connect to see your balance.</p>
+        <label class="check"><input id="must-take" type="checkbox">Must take the throne</label><p id="must-help" class="muted">If this buy cannot take the throne at execution, the whole swap reverts. Gas may still be spent.</p>
+        <label for="slippage">Slippage tolerance · %</label><input id="slippage" type="text" inputmode="decimal" value="0.5" required>
+        <div class="quote"><p><span>Estimated received</span><strong id="quote-output">—</strong></p><p><span>Minimum received</span><strong id="quote-minimum">—</strong></p><p><span>Quote validity</span><strong id="quote-age">30 seconds</strong></p></div>
+        <button type="button" id="approve" class="outline wide" hidden disabled>Approve exact KING amount</button><button type="button" id="quote" class="outline wide" disabled>Preview trade</button><button type="submit" id="submit-trade" class="wide" disabled>Confirm buy</button>
+      </form><aside class="panel trade-notes"><p class="eyebrow">KNOW YOUR MOVE</p><h2>One buy.<br>One new reign.</h2><p id="trade-price">The throne price will appear here when live.</p><p id="trade-game">The game opens 30 minutes after pool initialization.</p><hr><p>Hook fee: <strong id="trade-fee">25% → 2.5%</strong>. The pool charges a separate <strong>1.25%</strong>. Previews include both fees and price impact; gas is extra.</p><p>Keep all KING required by your takeover. Any sell through this app ends your reign immediately, even a small one. Unfilled sell input is refunded.</p><p>Quotes can change before inclusion. The minimum output, five-minute deadline, and optional throne requirement are enforced onchain.</p></aside></div>
+    </section>
+    <section id="claim" class="page" hidden>
+      <p class="eyebrow">THE REWARDS OF YOUR REIGN</p><h1>Claim what you earned.</h1><p class="lede">Vested income stays yours, even after another king takes the throne.</p>
+      <div class="action-grid"><article class="panel"><span>Your claimable income</span><h2 id="own-income">— ETH</h2><p id="own-address">Connect your wallet to see your income.</p><button id="claim-income" class="wide" disabled>Claim income</button><p class="muted">Only your wallet's credit can be claimed. The team uses this same action to collect its 8% share.</p><p>Each reign must last five minutes for its income to vest. Earlier exits forfeit provisional income, including self-retakes and rival takeovers.</p></article><article class="panel"><p class="eyebrow">KEEP THE GAME HONEST</p><h2>Check the king's holdings.</h2><dl><dt>KING required</dt><dd id="required">—</dd><dt>KING currently held</dt><dd id="held">—</dd></dl><p id="holding-status">Waiting for live holdings.</p><button id="dethrone" class="outline wide" disabled>Dethrone the king</button><p class="muted">Anyone can dethrone a king whose balance is below the requirement. The contract checks the balance again at execution. No bounty is paid.</p></article></div>
+    </section>
+    <section id="about" class="page" hidden>
+      <p class="eyebrow">A GAME WITH NO OWNER</p><h1>Learn the rules.</h1>
+      <div class="rules"><article class="panel"><span class="number">01</span><h2>Trade to fill the pool.</h2><p>Every buy and sell pays an ETH hook fee. It starts at 25% and falls linearly to 2.5% over 30 minutes. Of that hook fee, 92% goes to the throne pool and 8% to the team's pull-based credit. The factory's 1.25% pool fee is additional.</p></article><article class="panel"><span class="number">02</span><h2>Buy your way to the throne.</h2><p>After anti-snipe ends, one buy at or above the current throne price takes the throne. Small buys never add up. The new price is 1.2× the ETH paid, including the hook fee, and decays continuously to half each hour, down to 0.01 ETH. An empty throne costs 0.01 ETH.</p></article><article class="panel"><span class="number">03</span><h2>Hold to earn.</h2><p>Income accrues each second, with the throne pool retaining approximately 98% per hour without new fees. Income from a reign vests after five minutes; any earlier end forfeits it. Vested booked credits remain claimable after losing the throne. This is variable game income funded by trades.</p></article><article class="panel"><span class="number">04</span><h2>Leave, and lose the crown.</h2><p>Selling through the official router ends the reign immediately. A holding shortfall can be detected by any swap, claim, or permissionless dethrone call; provisional and unverified income is forfeited. Transfers have no callback. Exits and restorations between checks, and foreign-router sales that leave enough balance, cannot be detected.</p></article></div>
+      <article class="panel about-details"><h2>Fixed from the first block.</h2><p>1,000,000,000 KING. 18 decimals. Minted once to the launch factory. No token transfer fees, minting powers, limits, pausing, upgrades, or owner. Hook callbacks act on initialization and swaps, never transfers or liquidity changes. Only the official KingRouter can authenticate a buyer for a takeover; this app always uses it.</p><p>Launch terms: 900,000,000 KING (90%) in single-sided liquidity, 0% to the requester, starting total-supply market cap 10 ETH. The remaining 10% follows the launch network's contributor policy. Market cap is an initial price setting, not a reserve or redemption promise.</p><p>Transaction ordering, bots, and sequencer delays can affect a takeover. “Must take” protects the execution of your buy; it does not guarantee how long your reign lasts.</p></article>
+      <h2>Verify the contracts.</h2><p id="address-note">Contract addresses are awaiting deployment. No placeholder address is used for transactions.</p><dl id="addresses" class="panel addresses"></dl>
+      <p><a href="https://github.com/identity-md-launches/launch-814-custom-token-king-hill" target="_blank" rel="noopener noreferrer">Original launch 814 source ↗</a> · <a href="https://docs.robinhood.com/chain/connecting/" target="_blank" rel="noopener noreferrer">Robinhood Chain network details ↗</a></p>
+    </section>
+  </main>
+  <footer><a class="brand" href="#throne">KING</a><p>Made by agents. Not audited by humans. Trade at your own risk.</p><span>THE CROWN KEEPS MOVING.</span></footer>
+  <noscript><p class="notice">JavaScript is required to read contracts and connect a wallet.</p></noscript>
+</body>
+</html>

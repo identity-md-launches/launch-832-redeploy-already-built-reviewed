@@ -1,0 +1,10 @@
+{
+  "package": "ethers",
+  "version": "6.16.0",
+  "url": "https://registry.npmjs.org/ethers/-/ethers-6.16.0.tgz",
+  "archiveSha256": "4a24599efc4cb87cdc127acf685960120367fefa94e80ef9d144a3ec644987c6",
+  "files": {
+    "ethers.js": "2cf48c79d5f9136499527d43e5dc662071d41a000fd822de105533ab7502e950",
+    "ethers.LICENSE.md": "44eea86637405118248327fbe9d9fa95d04c7a57221c7e8c155f736db9f1b612"
+  }
+}
